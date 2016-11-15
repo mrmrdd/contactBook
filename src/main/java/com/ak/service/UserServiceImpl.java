@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserbyName(String name) {
-       return dao.getByName(name);
+    public User findByLogin(String login) {
+       return dao.getByLogin(login);
     }
 
     @Override

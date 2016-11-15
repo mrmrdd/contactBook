@@ -12,7 +12,7 @@ public interface UserService {
 
     void addUser(User user);
 
-    User findUserbyName(String name);
+    User findByLogin(String name);
 
     void updateData(User user);
 }
