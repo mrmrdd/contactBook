@@ -9,6 +9,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by MacDuck on 11/15/16.
@@ -26,5 +27,11 @@ public class UserServiceTest {
         User user1 = new User("admin", "qwerty", "EKA");
         userService.addUser(user1);
         assertEquals("admin", userService.findByLogin("admin").getLogin());
+    }
+
+    @Test
+    public void getUserTest(){
+        User user = new User("admin", "qwerty", "EKA");
+        assertEquals(user.getLogin(), userService.findByLogin(user.getLogin()).getLogin());
     }
 }
