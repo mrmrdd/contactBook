@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<h2>Войдите в систему</h2>
+<form>
+
+</form>
+<h2>Зарегейстрируйтесь, если у вас нет аккаунта</h2>
+<form action="/registration">
+    <button type="submit">Регистрация</button>
+</form>
+<form action="/contact">
+    <button type="submit">Контакты</button>
+</form>
+<p th:text="'My name is ' + ${name}"></p>
+</body>
+</html>
