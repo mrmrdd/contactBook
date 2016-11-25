@@ -16,7 +16,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotNull
@@ -29,17 +29,31 @@ public class User {
     private String password;
     private String FIO;
 
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Contact> phoneBook;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role",
+                    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+                    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
+
+    private boolean enabled = true;
+
+    private boolean credentialsexpired = false;
+
+    private boolean locked = false;
 
     public User() {
     }
 
-    public User(String login, String password, String FIO) {
-        this.login = login;
-        this.password = password;
-        this.FIO = FIO;
+    public User(User user) {
+        this.login = user.login;
+        this.password = user.password;
+        this.FIO = user.FIO;
+        this.enabled = user.enabled;
+        this.phoneBook = user.phoneBook;
+        this.roles = user.roles;
     }
 
     public long getId() {
@@ -74,11 +88,27 @@ public class User {
         this.FIO = FIO;
     }
 
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public List<Contact> getPhoneBook() {
         return phoneBook;
     }
 
     public void setPhoneBook(List<Contact> phoneBook) {
         this.phoneBook = phoneBook;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
