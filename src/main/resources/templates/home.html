@@ -6,12 +6,6 @@
 
 </form>
 <h2>Зарегейстрируйтесь, если у вас нет аккаунта</h2>
-<form action="/registration">
-    <button type="submit">Регистрация</button>
-</form>
-<form action="/contact">
-    <button type="submit">Контакты</button>
-</form>
-<p th:text="'My name is ' + ${name}"></p>
+<p>Click <a th:href="@{/registration.html}">here</a> to registration new user.</p>
 </body>
 </html>

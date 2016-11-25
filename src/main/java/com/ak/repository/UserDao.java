@@ -3,6 +3,7 @@ package com.ak.repository;
 import com.ak.entity.Contact;
 import com.ak.entity.User;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -27,6 +28,8 @@ public class UserDao {
     }
 
     public void save(User user){
+        String queryInsert = "INSERT INTO user_role (user_id, role_id) SELECT u.id, r.id FROM" +
+                             " User u, Role r WHERE u.login = " + user.getLogin() + " and r.id = 2";
         getSession().save(user);
     }
 
@@ -38,7 +41,10 @@ public class UserDao {
         return user;
     }
 
-    public void udpate(User user){
-        getSession().update(user);
+    public void setRole(User user){
+        String queryInsert = "INSERT INTO user_role (user_id, role_id) SELECT u.id, r.id FROM" +
+                             " User u, Role r WHERE u.login = " + user.getLogin() + " and r.id = 2";
+        Query query = getSession().createQuery(queryInsert);
+        int result = query.executeUpdate();
     }
 }
