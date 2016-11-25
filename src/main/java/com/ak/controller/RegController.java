@@ -32,6 +32,8 @@ public class RegController {
     @RequestMapping(method = RequestMethod.POST)
    public String registerUser(@ModelAttribute User user) {
         userService.addUser(user);
+        User userWithoutRole = userService.findByLogin(user.getLogin());
+        userService.setRole(userWithoutRole);
         return "done";
     }
 }
